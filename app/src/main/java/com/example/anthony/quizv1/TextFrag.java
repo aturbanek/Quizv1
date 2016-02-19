@@ -219,7 +219,7 @@ public class TextFrag extends Fragment {
         if(a4.equals("cow")) {
             score++;
         }
-        String correct = "you answered "+ score + " correct";
+        String correct = "you answered "+ score + " correct ";
         displayWinner(correct);
     }
 

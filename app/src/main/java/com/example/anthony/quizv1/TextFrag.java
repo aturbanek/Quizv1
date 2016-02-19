@@ -32,12 +32,12 @@ public class TextFrag extends Fragment {
     private static final String ARG_PARAM4 = "param4";
 
     // TODO: Rename and change types of parameters
-    private String q1;
-    private String q2;
-    private String q3;
-    private String q4;
+    private String a1;
+    private String a2;
+    private String a3;
+    private String a4;
 
-    int score = 0;
+    int score= 0;
 
     private TextView question;
     private RadioButton button1;
@@ -82,10 +82,10 @@ public class TextFrag extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            q1= getArguments().getString(ARG_PARAM1);
-            q2 = getArguments().getString(ARG_PARAM2);
-            q3 = getArguments().getString(ARG_PARAM3);
-            q4 = getArguments().getString(ARG_PARAM4);
+            a1= getArguments().getString(ARG_PARAM1);
+            a2 = getArguments().getString(ARG_PARAM2);
+            a3 = getArguments().getString(ARG_PARAM3);
+            a4 = getArguments().getString(ARG_PARAM4);
         }
     }
 
@@ -94,19 +94,19 @@ public class TextFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_text, container, false);
-        question = (TextView)view.findViewById(R.id.radioButton);
+        question = (TextView)view.findViewById(R.id.textView);
         button1 = (RadioButton)view.findViewById(R.id.radioButton);
-        button2 = (RadioButton)view.findViewById(R.id.radioButton);
-        button3 = (RadioButton)view.findViewById(R.id.radioButton);
+        button2 = (RadioButton)view.findViewById(R.id.radioButton2);
+        button3 = (RadioButton)view.findViewById(R.id.radioButton3);
 
-        if(q1==null)
+        if(a1==null)
         {
             question.setText(question1[0]);
             button1.setText(question1[1]);
             button2.setText(question1[2]);
             button3.setText(question1[3]);
         }
-        else if(q2 == null)
+        else if(a2 == null)
         {
             question.setText(question2[0]);
             button1.setText(question2[1]);
@@ -130,21 +130,23 @@ public class TextFrag extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (q1 == null) {
+                if (a1 == null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_fragment_container, TextFrag.newInstance(question1[1], null, null, null))
                             .addToBackStack(null)
+                            .replace(R.id.main_fragment_container, TextFrag.newInstance(question1[1], null, null, a4))
+
                             .commit();
 
-                } else if (q2 == null) {
+                } else if (a2 == null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_fragment_container, TextFrag.newInstance(q1, question1[2], null, null))
                             .addToBackStack(null)
+                            .replace(R.id.main_fragment_container, TextFrag.newInstance(a1, question1[2], null, a4))
+
                             .commit();
                 } else {
-                    q3 = question1[3];
+                    a3 = question1[3];
                     score();
 
                 }
@@ -153,21 +155,23 @@ public class TextFrag extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (q1 == null) {
+                if (a1 == null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_fragment_container, TextFrag.newInstance(question2[1], null, null, null))
                             .addToBackStack(null)
+                            .replace(R.id.main_fragment_container, TextFrag.newInstance(question2[1], null, null, a4))
+
                             .commit();
 
-                } else if (q2 == null) {
+                } else if (a2 == null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_fragment_container, TextFrag.newInstance(q1, question2[2], null, null))
                             .addToBackStack(null)
+                            .replace(R.id.main_fragment_container, TextFrag.newInstance(a1, question2[2], null, a4))
+
                             .commit();
                 } else {
-                    q3 = question2[3];
+                    a3 = question2[3];
                     score();
 
                 }
@@ -176,21 +180,21 @@ public class TextFrag extends Fragment {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (q1 == null) {
+                if (a1 == null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_fragment_container,TextFrag.newInstance(question3[1], null, null, null))
                             .addToBackStack(null)
+                            .replace(R.id.main_fragment_container, TextFrag.newInstance(question3[1], null, null, a4))
                             .commit();
 
-                } else if (q2 == null) {
+                } else if (a2 == null) {
                     getFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_fragment_container,TextFrag.newInstance(q1,question3[2] , null, null))
                             .addToBackStack(null)
+                            .replace(R.id.main_fragment_container, TextFrag.newInstance(a1, question3[2] , null, a4))
                             .commit();
                 } else {
-                    q3 = question3[3];
+                    a3 = question3[3];
                     score();
 
                 }
@@ -201,18 +205,22 @@ public class TextFrag extends Fragment {
 
     public void score()
     {
-        if(q1.equals("407")){
+        if(a1.equals(question1[2])){
             score++;
         }
-        if(q2.equals("M W F"))
+        if(a2.equals(question2[3]))
         {
             score++;
         }
-        if(q3.equals("Union South"))
+        if(a3.equals(question3[1]))
         {
             score++;
         }
-
+        if(a4.equals("cow")) {
+            score++;
+        }
+        String correct = "you answered "+ score + " correct";
+        displayWinner(correct);
     }
 
 
